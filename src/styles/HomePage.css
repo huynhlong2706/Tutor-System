@@ -1,7 +1,25 @@
 /*
- * SỬ DỤNG FONT ROBOTO
+ * SỬ DỤNG FONT ROBOTO, MONTERRAT ALTERNATES
  */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700;900&display=swap');
+
+/* LiquidGlass Variables */
+:root {
+  --c-glass: #bbbbbc;
+  --c-light: #fff;
+  --c-dark: #000;
+  --c-content: #224;
+  --c-action: #0066cc;
+  --c-bg: #E8E8E9;
+  --glass-reflex-dark: 1;
+  --glass-reflex-light: 1;
+  --saturation: 150%;
+  
+  /* Transition settings */
+  --transition-duration: 400ms;
+  --transition-easing: cubic-bezier(1, 0.0, 0.4, 1);
+}
 
 /* --- Global Reset và Container Chính --- */
 * {
@@ -10,7 +28,7 @@
   box-sizing: border-box;
 }
 
-.login-page {
+.home-page {
   min-height: 100vh;
   width: 100vw;
   background: linear-gradient(135deg, #e8f4fd 0%, #b8dff4 50%, #7cc7e8 100%);
@@ -133,46 +151,106 @@
 .title {
     font-size: 4rem;
     font-weight: 900;
-    color: #000000;
-    
-    /* Cấu hình Nền trong suốt (Glassmorphism) */
-    background: rgba(255, 255, 255, 0.5); /* Nền trắng trong suốt 30% */
-    backdrop-filter: blur(0.5px); /* Làm mờ background phía sau */
-    -webkit-backdrop-filter: blur(0.5px); 
-    
+    color: var(--c-content);
+    font-family: 'Montserrat Alternates', sans-serif;
+
     /* Hình dạng viên thuốc và Viền */
-    border: 2px solid rgba(255, 255, 255, 0.2); /* Viền trắng dày hơn */
-    border-radius: 50px; /* Độ cong lớn hơn để thành hình viên thuốc */
-    padding: 10px 40px; /* Điều chỉnh padding */
+    border: none;
+    border-radius: 50px;
+    padding: 20px 50px;
+
+    /* LiquidGlass Effect */
+    background-color: color-mix(in srgb, var(--c-glass) 15%, transparent);
+    backdrop-filter: blur(4px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(4px) saturate(var(--saturation));
+
+    /* LiquidGlass shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 2px 4px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent), 
+        inset -3px -3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent), 
+        inset -4px -10px 2px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 70%), transparent), 
+        inset -1px -2px 6px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        inset -2px 3px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 0px 4px 6px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 3px -8px 2px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 8px 24px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
     
-    /* Bóng đổ và Margin */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-    margin-bottom: 50px; /* Khoảng cách với nút Đăng nhập */
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+
+    /* Smooth transitions */
+    transition: 
+        transform var(--transition-duration) var(--transition-easing),
+        box-shadow var(--transition-duration) var(--transition-easing),
+        background-color var(--transition-duration) var(--transition-easing);
     
-    /* Bỏ text-shadow để chữ rõ nét */
     text-shadow: none;
 }
 
 /* Nút Đăng nhập */
 .login-button {
     padding: 15px 50px;
-    background-color: #0066cc;
     border: none;
     border-radius: 30px;
     color: white;
     font-size: 1.3rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
-    transition: all 0.3s ease;
     z-index: 2;
     position: relative;
+    overflow: hidden;
+    
+    /* LiquidGlass Effect*/
+    background: linear-gradient(135deg, 
+        color-mix(in srgb, var(--c-action) 95%, transparent) 0%,
+        color-mix(in srgb, var(--c-action) 85%, transparent) 50%,
+        color-mix(in srgb, var(--c-action) 100%, transparent) 100%);
+    
+    backdrop-filter: blur(4px) saturate(200%);
+    -webkit-backdrop-filter: blur(4px) saturate(200%);
+
+    /* LiquidGlass shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) 15%, transparent),
+        inset 2px 4px 0px -2px color-mix(in srgb, var(--c-light) 95%, transparent), 
+        inset -3px -3px 0px -2px color-mix(in srgb, var(--c-light) 85%, transparent), 
+        inset -4px -10px 2px -6px color-mix(in srgb, var(--c-light) 70%, transparent), 
+        inset -1px -2px 6px 0px color-mix(in srgb, var(--c-dark) 15%, transparent), 
+        inset -2px 3px 0px -2px color-mix(in srgb, var(--c-dark) 25%, transparent), 
+        inset 0px 4px 6px -2px color-mix(in srgb, var(--c-dark) 25%, transparent), 
+        inset 3px -8px 2px -4px color-mix(in srgb, var(--c-dark) 15%, transparent), 
+        0px 2px 8px 0px color-mix(in srgb, var(--c-action) 50%, transparent), 
+        0px 8px 24px 0px color-mix(in srgb, var(--c-action) 40%, transparent);
+    
+    transition: 
+        transform var(--transition-duration) var(--transition-easing),
+        box-shadow var(--transition-duration) var(--transition-easing),
+        background var(--transition-duration) var(--transition-easing);
+}
+
+/* Blue background layer */
+.login-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1976d2 0%, #0057b3 100%);
+    z-index: -1;
+    border-radius: 30px;
+    opacity: 0.9;
 }
 
 .login-button:hover {
-    background-color: #0052a3;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+}
+
+.login-button:active {
+    transform: translateY(0);
 }
 
 /* --- 3. Footer Styling --- */

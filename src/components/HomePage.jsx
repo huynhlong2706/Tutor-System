@@ -1,13 +1,21 @@
 import React from 'react';
+// 
+import { useNavigate } from 'react-router-dom';
 // Đảm bảo đường dẫn này đúng
 import './../styles/HomePage.css'; 
 
 // Đảm bảo logo nằm đúng vị trí trong assets/images
 import hcmutLogo from '../assets/images/hcmut_logo.png'; 
 
-function LoginPage() {
+function HomePage() {
+  // Sử dụng useNavigate để điều hướng khi nút được nhấn
+  const navigate = useNavigate();
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
-    <div className="login-page">
+    <div className="home-page">
       
       {/* 1. Header: Logo và tên trường - Dùng Flexbox để căn 3 cột */}
       <div className="header-bar">
@@ -35,7 +43,7 @@ function LoginPage() {
       <div className="main-content">
         <h1 className="title">Tutor System</h1>
         
-        <button className="login-button">
+        <button className="login-button" onClick={handleLoginClick}>
           Đăng nhập
         </button>
       </div>
@@ -49,4 +57,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default HomePage;
