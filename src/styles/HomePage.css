@@ -1,0 +1,187 @@
+/*
+ * SỬ DỤNG FONT ROBOTO
+ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+/* --- Global Reset và Container Chính --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-page {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #e8f4fd 0%, #b8dff4 50%, #7cc7e8 100%);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+}
+
+/* --- 1. Header Styling --- */
+.header-bar {
+    width: 100%;
+    background-color: white;
+    padding: 10px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #0066cc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cột Trái: Logo + Tên ĐHQG */
+.logo-section {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+    margin-right: 20px;
+    object-fit: contain;
+}
+
+.university-names {
+    display: flex;
+    flex-direction: column;
+}
+
+.university-names p {
+    margin: 0;
+    line-height: 1.1;
+}
+
+.university-names .main-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #030391;
+}
+
+.university-names .sub-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1488DB;
+    margin-top: 2px;
+    text-align: center;
+}
+
+/* Cột Phải: Chữ Tiếng Anh */
+.english-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.english-names {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.english-names p {
+    margin: 0;
+    line-height: 1.1;
+}
+
+.english-names .english-main-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #030391;
+    text-align: center;
+}
+
+.english-names .english-sub-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1488DB;
+    margin-top: 2px;
+    text-align: center;
+}
+
+/* --- 2. Main Content Styling --- */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 50px 20px;
+    position: relative;
+    background-image: url('../assets/images/hcmut_nen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #000000;
+    
+    /* Cấu hình Nền trong suốt (Glassmorphism) */
+    background: rgba(255, 255, 255, 0.5); /* Nền trắng trong suốt 30% */
+    backdrop-filter: blur(0.5px); /* Làm mờ background phía sau */
+    -webkit-backdrop-filter: blur(0.5px); 
+    
+    /* Hình dạng viên thuốc và Viền */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Viền trắng dày hơn */
+    border-radius: 50px; /* Độ cong lớn hơn để thành hình viên thuốc */
+    padding: 10px 40px; /* Điều chỉnh padding */
+    
+    /* Bóng đổ và Margin */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    margin-bottom: 50px; /* Khoảng cách với nút Đăng nhập */
+    
+    /* Bỏ text-shadow để chữ rõ nét */
+    text-shadow: none;
+}
+
+/* Nút Đăng nhập */
+.login-button {
+    padding: 15px 50px;
+    background-color: #0066cc;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+    transition: all 0.3s ease;
+    z-index: 2;
+    position: relative;
+}
+
+.login-button:hover {
+    background-color: #0052a3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+}
+
+/* --- 3. Footer Styling --- */
+.footer {
+    width: 100%;
+    background-color: #0066cc;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+}
