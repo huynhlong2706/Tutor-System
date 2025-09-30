@@ -1,0 +1,363 @@
+/*
+ * SỬ DỤNG FONT ROBOTO
+ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+/* LiquidGlass Variables */
+:root {
+  --c-glass: #bbbbbc;
+  --c-light: #fff;
+  --c-dark: #000;
+  --c-content: #224;
+  --c-action: #0066cc;
+  --c-bg: #E8E8E9;
+  --glass-reflex-dark: 1;
+  --glass-reflex-light: 1;
+  --saturation: 150%;
+  
+  /* Transition settings */
+  --transition-duration: 400ms;
+  --transition-easing: cubic-bezier(1, 0.0, 0.4, 1);
+}
+
+/* --- Global Reset và Container Chính --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-page {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #e8f4fd 0%, #b8dff4 50%, #7cc7e8 100%);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+}
+
+/* --- 1. Header Styling --- */
+.header-bar {
+    width: 100%;
+    background-color: white;
+    padding: 10px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #0066cc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cột Trái: Logo + Tên ĐHQG */
+.logo-section {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+    margin-right: 20px;
+    object-fit: contain;
+}
+
+.university-names {
+    display: flex;
+    flex-direction: column;
+}
+
+.university-names p {
+    margin: 0;
+    line-height: 1.1;
+}
+
+.university-names .main-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #030391;
+}
+
+.university-names .sub-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1488DB;
+    margin-top: 2px;
+    text-align: center;
+}
+
+/* Cột Phải: Chữ Tiếng Anh */
+.english-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.english-names {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.english-names p {
+    margin: 0;
+    line-height: 1.1;
+}
+
+.english-names .english-main-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #030391;
+    text-align: center;
+}
+
+.english-names .english-sub-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1488DB;
+    margin-top: 2px;
+    text-align: center;
+}
+
+/* --- 2. Main Content Styling --- */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 50px 20px;
+    position: relative;
+    background-image: url('../assets/images/hcmut_nen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--c-content);
+    font-family: 'Montserrat Alternates', sans-serif;
+    cursor: pointer;
+    
+    /* Hình dạng viên thuốc và Viền */
+    border: none;
+    border-radius: 50px;
+    padding: 15px 40px;
+
+    /* LiquidGlass Effect */
+    background-color: color-mix(in srgb, var(--c-glass) 15%, transparent);
+    backdrop-filter: blur(4px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(4px) saturate(var(--saturation));
+
+    /* LiquidGlass shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 2px 4px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent), 
+        inset -3px -3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent), 
+        inset -4px -10px 2px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 70%), transparent), 
+        inset -1px -2px 6px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        inset -2px 3px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 0px 4px 6px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 3px -8px 2px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 8px 24px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
+    
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+    
+    /* Smooth transitions */
+    transition: 
+        transform var(--transition-duration) var(--transition-easing),
+        box-shadow var(--transition-duration) var(--transition-easing),
+        background-color var(--transition-duration) var(--transition-easing);
+    
+    text-shadow: none;
+}
+
+.title:hover {
+    transform: translateY(-2px);
+}
+
+/* --- Form đăng nhập --- */
+.login-form {
+    /* LiquidGlass Effect */
+    background-color: color-mix(in srgb, var(--c-glass) 15%, transparent);
+    backdrop-filter: blur(4px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(4px) saturate(var(--saturation));
+    
+    border: none;
+    border-radius: 20px;
+    padding: 40px;
+    
+    /* LiquidGlass shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 2px 4px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent), 
+        inset -3px -3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent), 
+        inset -4px -10px 2px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 70%), transparent), 
+        inset -1px -2px 6px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        inset -2px 3px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 0px 4px 6px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 3px -8px 2px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 8px 24px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
+    
+    z-index: 2;
+    position: relative;
+    min-width: 400px;
+    
+    /* Smooth transitions */
+    transition: 
+        transform var(--transition-duration) var(--transition-easing),
+        box-shadow var(--transition-duration) var(--transition-easing),
+        background-color var(--transition-duration) var(--transition-easing);
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #030391;
+    font-size: 1rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    color: var(--c-content);
+    
+    /* LiquidGlass Effect */
+    background-color: color-mix(in srgb, var(--c-glass) 8%, transparent);
+    backdrop-filter: blur(4px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(4px) saturate(var(--saturation));
+    
+    /* LiquidGlass shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 5%), transparent),
+        inset 1px 2px 0px -1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent), 
+        inset -1px -1px 0px -1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 50%), transparent), 
+        inset -0.2px -0.5px 2px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent), 
+        0px 1px 3px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 5%), transparent);
+        
+    transition: 
+        all 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input:focus {
+    outline: none;
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    
+    /* LiquidGlass shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-action) 30%, transparent),
+        inset 1px 2px 0px -1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 70%), transparent), 
+        inset -1px -1px 0px -1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent), 
+        inset -0.2px -0.5px 3px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent), 
+        0px 2px 6px 0px color-mix(in srgb, var(--c-action) 20%, transparent),
+        0px 0 0 3px color-mix(in srgb, var(--c-action) 10%, transparent);
+}
+
+.form-input::placeholder {
+    color: #999;
+}
+
+/* Nút Đăng nhập trong form */
+.login-submit-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    
+    /* LiquidGlass Effect */
+    background: linear-gradient(135deg, 
+        color-mix(in srgb, var(--c-action) 95%, transparent) 0%,
+        color-mix(in srgb, var(--c-action) 85%, transparent) 50%,
+        color-mix(in srgb, var(--c-action) 100%, transparent) 100%);
+    
+    backdrop-filter: blur(4px) saturate(200%);
+    -webkit-backdrop-filter: blur(4px) saturate(200%);
+    
+    /* LiquidGlass shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) 15%, transparent),
+        inset 2px 4px 0px -2px color-mix(in srgb, var(--c-light) 95%, transparent), 
+        inset -3px -3px 0px -2px color-mix(in srgb, var(--c-light) 85%, transparent), 
+        inset -4px -10px 2px -6px color-mix(in srgb, var(--c-light) 70%, transparent), 
+        inset -1px -2px 6px 0px color-mix(in srgb, var(--c-dark) 15%, transparent), 
+        inset -2px 3px 0px -2px color-mix(in srgb, var(--c-dark) 25%, transparent), 
+        inset 0px 4px 6px -2px color-mix(in srgb, var(--c-dark) 25%, transparent), 
+        inset 3px -8px 2px -4px color-mix(in srgb, var(--c-dark) 15%, transparent), 
+        0px 2px 8px 0px color-mix(in srgb, var(--c-action) 50%, transparent), 
+        0px 8px 24px 0px color-mix(in srgb, var(--c-action) 40%, transparent);
+    
+    transition: 
+        transform var(--transition-duration) var(--transition-easing),
+        box-shadow var(--transition-duration) var(--transition-easing),
+        background var(--transition-duration) var(--transition-easing);
+}
+
+/* Blue background layer */
+.login-submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1976d2 0%, #0057b3 100%);
+    z-index: -1;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.login-submit-button:hover {
+    transform: translateY(-2px);
+}
+
+.login-submit-button:active {
+    transform: translateY(0);
+}
+
+/* --- 3. Footer Styling --- */
+.footer {
+    width: 100%;
+    background-color: #0066cc;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+}
