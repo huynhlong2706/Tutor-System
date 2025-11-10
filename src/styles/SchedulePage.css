@@ -1,0 +1,470 @@
+/* Schedule Page Styles */
+.schedule-page {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar - Giống Dashboard */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 25px;
+    z-index: 1000;
+    border-bottom: 3px solid #0066cc;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.navbar-logo {
+    height: 70px;
+    width: auto;
+    margin-right: 20px;
+    object-fit: contain;
+}
+
+.navbar-university-names {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-university-names p {
+    margin: 0;
+    line-height: 1.1;
+}
+
+.navbar-main-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #030391;
+}
+
+.navbar-sub-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1488DB;
+    margin-top: 2px;
+    text-align: center;
+}
+
+.navbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 40px;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 500px;
+    height: 45px;
+    padding: 0 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus {
+    border-color: #1565C0;
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.notification-btn,
+.message-btn {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-btn:hover,
+.message-btn:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1);
+}
+
+/* Analog Clock */
+.analog-clock {
+    width: 50px;
+    height: 50px;
+}
+
+.clock-face {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #1565C0;
+    border-radius: 50%;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.clock-center {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #1565C0;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.hour-hand,
+.minute-hand,
+.second-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    background-color: #1565C0;
+    border-radius: 10px;
+}
+
+.hour-hand {
+    width: 3px;
+    height: 12px;
+    z-index: 2;
+}
+
+.minute-hand {
+    width: 2px;
+    height: 16px;
+    z-index: 2;
+}
+
+.second-hand {
+    width: 1px;
+    height: 18px;
+    background-color: #C62828;
+    z-index: 2;
+}
+
+/* Sidebar - Giống Dashboard */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 95px;
+    width: 70px;
+    height: calc(100vh - 95px);
+    background-color: #1565C0;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.sidebar.expanded {
+    width: 220px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-icon {
+    font-size: 24px;
+    min-width: 30px;
+}
+
+.menu-text {
+    margin-left: 15px;
+    font-size: 16px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.expanded .menu-text {
+    opacity: 1;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 70px;
+    margin-top: 95px;
+    padding: 40px;
+    min-height: calc(100vh - 95px);
+    background-color: #ffffff;
+}
+
+/* Calendar Section */  
+.calendar-section {
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+    height: 1080px; /* Chiều cao cố định cho toàn bộ section */
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+.calendar-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1565C0;
+    margin: 0;
+    min-width: 200px;
+    text-align: center;
+}
+
+.month-nav-btn {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #1565C0;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 18px;
+    color: #1565C0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 100;
+    pointer-events: auto;
+}
+
+.month-nav-btn:hover {
+    background-color: #1565C0;
+    color: white;
+    transform: scale(1.1);
+}
+
+.month-nav-btn:active {
+    transform: scale(0.95);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(140px, 1fr));
+    grid-template-rows: 50px repeat(6, 140px); /* 1 hàng tiêu đề 50px + 6 hàng ngày 140px mỗi hàng */
+    gap: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    height: 950px; /* Chiều cao cố định: 50 + (6 × 140) + (7 × 10) + (2 × 20) = 950px */
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-weight: 700;
+    color: #1565C0;
+    padding: 15px 5px;
+    font-size: 14px;
+    border-bottom: 2px solid #e0e0e0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day {
+    height: 140px;
+    width: 100%;
+    padding: 8px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 140px; /* Đảm bảo không vượt quá chiều cao */
+    min-height: 140px; /* Đảm bảo không nhỏ hơn chiều cao */
+}
+
+.calendar-day.empty {
+    background-color: transparent;
+    border: none;
+    height: 140px; /* Giữ chiều cao cố định cho cả ô trống */
+}
+
+.calendar-day.today {
+    background-color: #e3f2fd;
+    border: 2px solid #1565C0;
+}
+
+.calendar-day:not(.empty):hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.day-number {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 6px;
+    flex-shrink: 0; /* Không cho phép co lại */
+    line-height: 1;
+    height: 18px; /* Chiều cao cố định */
+}
+
+.day-classes {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(140px - 40px); /* Giới hạn chiều cao: 140px (ô) - 8px (padding top) - 8px (padding bottom) - 24px (day-number + margin) */
+    min-height: 0; /* Ngăn flex item tự động giãn */
+}
+
+.day-classes::-webkit-scrollbar {
+    width: 4px;
+}
+
+.day-classes::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.day-classes::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 10px;
+}
+
+.class-item {
+    padding: 6px 8px;
+    border-radius: 6px;
+    color: white;
+    font-size: 11px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0; /* Không cho phép co lại */
+    min-height: 0; /* Ngăn tự động giãn */
+}
+
+.class-item:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.class-name {
+    font-weight: 700;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.class-time {
+    font-size: 10px;
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .calendar-grid {
+        gap: 8px;
+    }
+
+    .calendar-day {
+        min-height: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 70px;
+        padding: 20px;
+    }
+
+    .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timeline-controls {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .filter-select,
+    .sort-select {
+        width: 100%;
+    }
+
+    .calendar-grid {
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .calendar-day {
+        min-height: 80px;
+        padding: 5px;
+    }
+
+    .day-number {
+        font-size: 14px;
+    }
+
+    .class-item {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .calendar-title {
+        font-size: 22px;
+    }
+
+    .timeline-title {
+        font-size: 22px;
+    }
+}

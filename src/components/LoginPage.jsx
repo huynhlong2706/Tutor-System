@@ -11,6 +11,11 @@ const LoginPage = () => {
     const handleTitleClick = () => {
         navigate('/');
     };
+
+    const handleLogin = () => {
+        // Sau này có thể thêm logic xác thực ở đây
+        navigate('/dashboard');
+    };
     
     return (
         <div className="login-page">
@@ -65,7 +70,7 @@ const LoginPage = () => {
                         />
                     </div>
                     
-                    <button className="login-submit-button">
+                    <button className="login-submit-button" onClick={handleLogin}>
                         Đăng nhập
                     </button>
                 </div>
