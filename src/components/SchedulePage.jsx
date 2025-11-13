@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../styles/SchedulePage.css';
 import hcmutLogo from '../assets/images/hcmut_logo.png';
+import SearchBar from './SearchBar';
+import { getCoursesForCalendar } from '../data/coursesData';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const SchedulePage = () => {
     const navigate = useNavigate();
+    const { t } = useLanguage();
     const [currentTime, setCurrentTime] = useState(new Date());
     const [isMenuExpanded, setIsMenuExpanded] = useState(false);
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [scheduleData, setScheduleData] = useState([]);
 
     // Cập nhật đồng hồ mỗi giây
     useEffect(() => {
@@ -17,33 +22,11 @@ const SchedulePage = () => {
         return () => clearInterval(timer);
     }, []);
 
-    // Dữ liệu mẫu cho lịch học
-    const [scheduleData] = useState([
-        {
-            id: 1,
-            subject: 'Lập trình hướng đối tượng',
-            tutor: 'TS. Nguyễn Văn A',
-            date: new Date(2025, 9, 20), // 20/10/2025
-            time: '14:00 - 16:00',
-            color: '#1565C0'
-        },
-        {
-            id: 2,
-            subject: 'Cấu trúc dữ liệu',
-            tutor: 'ThS. Trần Thị B',
-            date: new Date(2025, 9, 21), // 21/10/2025
-            time: '09:00 - 11:00',
-            color: '#2E7D32'
-        },
-        {
-            id: 3,
-            subject: 'Cơ sở dữ liệu',
-            tutor: 'TS. Lê Văn C',
-            date: new Date(2025, 9, 22), // 22/10/2025
-            time: '15:30 - 17:30',
-            color: '#F57C00'
-        },
-    ]);
+    // Lấy dữ liệu lịch học từ coursesData
+    useEffect(() => {
+        const courseSessions = getCoursesForCalendar();
+        setScheduleData(courseSessions);
+    }, []);
 
     // Lấy tất cả ngày trong tháng
     const getDaysInMonth = (date) => {
@@ -89,8 +72,11 @@ const SchedulePage = () => {
         setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + delta, 1));
     };
 
-    const monthNames = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
-                        'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+    const getMonthName = (monthIndex) => {
+        const monthKeys = ['month1', 'month2', 'month3', 'month4', 'month5', 'month6',
+                          'month7', 'month8', 'month9', 'month10', 'month11', 'month12'];
+        return t(monthKeys[monthIndex]);
+    };
 
     return (
         <div className="schedule-page">
@@ -99,24 +85,20 @@ const SchedulePage = () => {
                 <div className="navbar-left">
                     <img src={hcmutLogo} alt="Logo HCMUT" className="navbar-logo" />
                     <div className="navbar-university-names">
-                        <p className="navbar-main-name">ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH</p>
-                        <p className="navbar-sub-name">TRƯỜNG ĐẠI HỌC BÁCH KHOA</p>
+                        <p className="navbar-main-name">{t('vnuHcm')}</p>
+                        <p className="navbar-sub-name">{t('hcmut')}</p>
                     </div>
                 </div>
 
                 <div className="navbar-center">
-                    <input 
-                        type="text" 
-                        placeholder="Tìm kiếm môn học, tutor..." 
-                        className="search-box"
-                    />
+                    <SearchBar />
                 </div>
 
                 <div className="navbar-right">
-                    <button className="notification-btn" title="Thông báo">
+                    <button className="notification-btn" title={t('notificationBtn')}>
                         🔔
                     </button>
-                    <button className="message-btn" title="Tin nhắn">
+                    <button className="message-btn" title={t('messageBtn')}>
                         💬
                     </button>
                     <div className="analog-clock">
@@ -153,23 +135,23 @@ const SchedulePage = () => {
             >
                 <div className="menu-item" onClick={() => navigate('/dashboard')}>
                     <span className="menu-icon">🏠</span>
-                    <span className="menu-text">Trang Chủ</span>
+                    <span className="menu-text">{t('home')}</span>
                 </div>
-                <div className="menu-item">
-                    <span className="menu-icon">👨‍🏫</span>
-                    <span className="menu-text">Tìm Tutor</span>
+                <div className="menu-item" onClick={() => navigate('/courses')}>
+                    <span className="menu-icon">📚</span>
+                    <span className="menu-text">{t('courses')}</span>
                 </div>
                 <div className="menu-item active">
                     <span className="menu-icon">📅</span>
-                    <span className="menu-text">Lịch học</span>
+                    <span className="menu-text">{t('schedule')}</span>
                 </div>
                 <div className="menu-item">
                     <span className="menu-icon">⭐</span>
-                    <span className="menu-text">Đánh giá</span>
+                    <span className="menu-text">{t('reviews')}</span>
                 </div>
-                <div className="menu-item">
+                <div className="menu-item" onClick={() => navigate('/settings')}>
                     <span className="menu-icon">⚙️</span>
-                    <span className="menu-text">Cài đặt</span>
+                    <span className="menu-text">{t('settings')}</span>
                 </div>
             </div>
 
@@ -182,7 +164,7 @@ const SchedulePage = () => {
                             ◀
                         </button>
                         <h2 className="calendar-title">
-                            {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+                            {getMonthName(currentMonth.getMonth())} {currentMonth.getFullYear()}
                         </h2>
                         <button className="month-nav-btn" onClick={() => changeMonth(1)}>
                             ▶
@@ -191,13 +173,13 @@ const SchedulePage = () => {
 
                     <div className="calendar-grid">
                         {/* Tiêu đề các ngày trong tuần */}
-                        <div className="calendar-weekday">Thứ 2</div>
-                        <div className="calendar-weekday">Thứ 3</div>
-                        <div className="calendar-weekday">Thứ 4</div>
-                        <div className="calendar-weekday">Thứ 5</div>
-                        <div className="calendar-weekday">Thứ 6</div>
-                        <div className="calendar-weekday">Thứ 7</div>
-                        <div className="calendar-weekday">CN</div>
+                        <div className="calendar-weekday">{t('monday')}</div>
+                        <div className="calendar-weekday">{t('tuesday')}</div>
+                        <div className="calendar-weekday">{t('wednesday')}</div>
+                        <div className="calendar-weekday">{t('thursday')}</div>
+                        <div className="calendar-weekday">{t('friday')}</div>
+                        <div className="calendar-weekday">{t('saturday')}</div>
+                        <div className="calendar-weekday">{t('sunday')}</div>
 
                         {/* Các ngày trong tháng */}
                         {getDaysInMonth(currentMonth).map((day, index) => {
@@ -221,9 +203,10 @@ const SchedulePage = () => {
                                                         key={cls.id} 
                                                         className="class-item"
                                                         style={{ backgroundColor: cls.color }}
-                                                        title={`${cls.subject}\n${cls.time}\nTutor: ${cls.tutor}`}
+                                                        title={`${cls.title}\n${cls.time}\nGiảng viên: ${cls.instructor}`}
+                                                        onClick={() => navigate(`/course/${cls.courseId}`)}
                                                     >
-                                                        <div className="class-name">{cls.subject}</div>
+                                                        <div className="class-name">{cls.shortName}</div>
                                                         <div className="class-time">{cls.time}</div>
                                                     </div>
                                                 ))}

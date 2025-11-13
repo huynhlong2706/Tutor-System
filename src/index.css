@@ -3,7 +3,9 @@
 /* --- 1. CSS Reset & Box-Sizing --- */
 /* Đây là cách reset hiện đại và hiệu quả nhất. */
 html {
-  box-sizing: border-box; /* Đặt box-sizing cho phần tử gốc */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* Yêu cầu tất cả các phần tử khác kế thừa box-sizing từ html. */
@@ -17,11 +19,18 @@ body, h1, p, button {
   padding: 0;
 }
 
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* --- 2. Thiết lập nền tảng cho ứng dụng --- */
 /* Đảm bảo các thẻ gốc chiếm toàn bộ màn hình. */
 html, body, #root {
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* --- 3. Kiểu chữ và Giao diện mặc định --- */

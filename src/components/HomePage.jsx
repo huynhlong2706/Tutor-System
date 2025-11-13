@@ -25,7 +25,7 @@ function HomePage() {
           <img src={hcmutLogo} alt="Logo Bách Khoa" className="logo" />
           <div className="university-names">
             <p className="main-name">ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH</p>
-            <p className="sub-name highlight">TRƯỜNG ĐẠI HỌC BÁCH KHOA</p>
+            <p className="sub-name ">TRƯỜNG ĐẠI HỌC BÁCH KHOA</p>
           </div>
         </div>
 

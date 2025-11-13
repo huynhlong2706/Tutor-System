@@ -1,3 +1,18 @@
+/* LiquidGlass Variables */
+:root {
+  --c-glass: #bbbbbc;
+  --c-light: #fff;
+  --c-dark: #000;
+  --c-content: #224;
+  --c-action: #0066cc;
+  --c-bg: #E8E8E9;
+  --glass-reflex-dark: 1;
+  --glass-reflex-light: 1;
+  --saturation: 150%;
+  --transition-duration: 400ms;
+  --transition-easing: cubic-bezier(1, 0.0, 0.4, 1);
+}
+
 /* Dashboard Page Styles */
 .dashboard-page {
     min-height: 100vh;
@@ -234,19 +249,44 @@
 
 .welcome-section {
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .welcome-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #1565C0;
+    font-size: 48px;
+    font-weight: 900;
+    color: #000000;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
     margin: 0 0 10px 0;
+    display: inline-block;
+    
+    /* Liquid Glass Effect */
+    border-radius: 50px;
+    padding: 20px 50px;
+    background-color: color-mix(in srgb, var(--c-glass) 25%, transparent);
+    backdrop-filter: blur(6px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(6px) saturate(var(--saturation));
+    
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 2px 4px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent), 
+        inset -3px -3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent), 
+        inset -4px -10px 2px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 70%), transparent), 
+        inset -1px -2px 6px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        inset -2px 3px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 0px 4px 6px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent), 
+        inset 3px -8px 2px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent), 
+        0px 8px 24px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
+    
+    transition: transform var(--transition-duration) var(--transition-easing),
+                box-shadow var(--transition-duration) var(--transition-easing);
 }
 
 .welcome-subtitle {
     font-size: 16px;
     color: #666;
-    margin: 0;
+    margin: 15px 0 0 0;
 }
 
 /* Stats Container */
@@ -344,11 +384,12 @@
 }
 
 .tutor-avatar {
-    width: 60px;
+    width: 80px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 8px;
     overflow: hidden;
-    border: 3px solid #1565C0;
+    border: 2px solid #1565C0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tutor-avatar img {

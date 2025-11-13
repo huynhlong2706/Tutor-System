@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../styles/DashboardPage.css';
 import hcmutLogo from '../assets/images/hcmut_logo.png';
+import SearchBar from './SearchBar';
+import { getUpcomingCourses, formatDate } from '../data/coursesData';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const DashboardPage = () => {
     const navigate = useNavigate();
+    const { t, language } = useLanguage();
     const [isMenuExpanded, setIsMenuExpanded] = useState(false);
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [upcomingSessions, setUpcomingSessions] = useState([]);
     
     // Cập nhật đồng hồ mỗi giây
     useEffect(() => {
@@ -16,36 +21,20 @@ const DashboardPage = () => {
         return () => clearInterval(timer);
     }, []);
 
-    // Dữ liệu mẫu cho các buổi học
-    const [upcomingSessions, setUpcomingSessions] = useState([
-        {
-            id: 1,
-            subject: 'Lập trình hướng đối tượng',
-            tutor: 'TS. Nguyễn Văn A',
-            time: '14:00 - 16:00',
-            date: '20/10/2025',
-            status: 'pending', // pending, waiting, confirmed
-            avatar: 'https://via.placeholder.com/60'
-        },
-        {
-            id: 2,
-            subject: 'Cấu trúc dữ liệu và giải thuật',
-            tutor: 'ThS. Trần Thị B',
-            time: '09:00 - 11:00',
-            date: '21/10/2025',
+    // Lấy 3 khóa học gần nhất
+    useEffect(() => {
+        const courses = getUpcomingCourses(3);
+        const sessions = courses.map(course => ({
+            id: course.id,
+            subject: language === 'en' ? course.title_en : course.title,
+            tutor: language === 'en' ? course.instructor_en : course.instructor,
+            time: course.timeSlot,
+            date: formatDate(course.startDate),
             status: 'pending',
-            avatar: 'https://via.placeholder.com/60'
-        },
-        {
-            id: 3,
-            subject: 'Cơ sở dữ liệu',
-            tutor: 'TS. Lê Văn C',
-            time: '15:30 - 17:30',
-            date: '22/10/2025',
-            status: 'confirmed',
-            avatar: 'https://via.placeholder.com/60'
-        }
-    ]);
+            avatar: course.thumbnail
+        }));
+        setUpcomingSessions(sessions);
+    }, [language]);
 
     // Xử lý click nút xác nhận
     const handleConfirmClick = (sessionId) => {
@@ -75,10 +64,10 @@ const DashboardPage = () => {
     // Hiển thị text button dựa vào trạng thái
     const getButtonText = (status) => {
         switch (status) {
-            case 'pending': return 'Xác nhận';
-            case 'waiting': return 'Chờ xác nhận';
-            case 'confirmed': return 'Đã xác nhận';
-            default: return 'Xác nhận';
+            case 'pending': return t('confirm');
+            case 'waiting': return t('waitingConfirm');
+            case 'confirmed': return t('confirmed');
+            default: return t('confirm');
         }
     };
 
@@ -89,24 +78,20 @@ const DashboardPage = () => {
                 <div className="navbar-left">
                     <img src={hcmutLogo} alt="Logo HCMUT" className="navbar-logo" />
                     <div className="navbar-university-names">
-                        <p className="navbar-main-name">ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH</p>
-                        <p className="navbar-sub-name">TRƯỜNG ĐẠI HỌC BÁCH KHOA</p>
+                        <p className="navbar-main-name">{t('vnuHcm')}</p>
+                        <p className="navbar-sub-name">{t('hcmut')}</p>
                     </div>
                 </div>
 
                 <div className="navbar-center">
-                    <input 
-                        type="text" 
-                        placeholder="Tìm kiếm môn học, tutor..." 
-                        className="search-box"
-                    />
+                    <SearchBar />
                 </div>
 
                 <div className="navbar-right">
-                    <button className="notification-btn" title="Thông báo">
+                    <button className="notification-btn" title={t('notificationBtn')}>
                         🔔
                     </button>
-                    <button className="message-btn" title="Tin nhắn">
+                    <button className="message-btn" title={t('messageBtn')}>
                         💬
                     </button>
                     <div className="analog-clock">
@@ -141,67 +126,72 @@ const DashboardPage = () => {
                 onMouseEnter={() => setIsMenuExpanded(true)}
                 onMouseLeave={() => setIsMenuExpanded(false)}
             >
-                <div className="menu-item">
+                <div className="menu-item active">
                     <span className="menu-icon">🏠</span>
-                    <span className="menu-text">Trang Chủ</span>
+                    <span className="menu-text">{t('home')}</span>
                 </div>
-                <div className="menu-item">
-                    <span className="menu-icon">👨‍🏫</span>
-                    <span className="menu-text">Tìm Tutor</span>
+                <div className="menu-item" onClick={() => navigate('/courses')}>
+                    <span className="menu-icon">📚</span>
+                    <span className="menu-text">{t('courses')}</span>
                 </div>
                 <div className="menu-item" onClick={() => navigate('/schedule')}>
                     <span className="menu-icon">📅</span>
-                    <span className="menu-text">Lịch học</span>
+                    <span className="menu-text">{t('schedule')}</span>
                 </div>
                 <div className="menu-item">
                     <span className="menu-icon">⭐</span>
-                    <span className="menu-text">Đánh giá</span>
+                    <span className="menu-text">{t('reviews')}</span>
                 </div>
-                <div className="menu-item">
+                <div className="menu-item" onClick={() => navigate('/settings')}>
                     <span className="menu-icon">⚙️</span>
-                    <span className="menu-text">Cài đặt</span>
+                    <span className="menu-text">{t('settings')}</span>
                 </div>
             </div>
 
             {/* Main Content */}
             <main className="main-content">
                 <div className="welcome-section">
-                    <h1 className="welcome-title">Chào mừng bạn trở lại</h1>
-                    <p className="welcome-subtitle">Đây là tổng quan về hoạt động học tập của bạn</p>
+                    <h1 className="welcome-title">{t('welcome')}</h1>
+                    {/*<p className="welcome-subtitle">Đây là tổng quan về hoạt động học tập của bạn</p>*/}
                 </div>
 
                 {/* Stats Boxes */}
                 <div className="stats-container">
                     <div className="stat-box">
                         <div className="stat-number">8</div>
-                        <div className="stat-label">Buổi học tuần này</div>
-                        <div className="stat-description">Buổi học đã đặt</div>
+                        <div className="stat-label">{t('sessionsThisWeek')}</div>
+                        <div className="stat-description">{t('scheduledSessions')}</div>
                     </div>
                     <div className="stat-box">
                         <div className="stat-number">12</div>
-                        <div className="stat-label">Số tutor đã kết nối</div>
-                        <div className="stat-description">Tutor khác nhau</div>
+                        <div className="stat-label">{t('connectedTutors')}</div>
+                        <div className="stat-description">{t('differentTutors')}</div>
                     </div>
                     <div className="stat-box">
                         <div className="stat-number">45</div>
-                        <div className="stat-label">Số buổi đã học</div>
-                        <div className="stat-description">Buổi đã hoàn thành</div>
+                        <div className="stat-label">{t('completedSessions')}</div>
+                        <div className="stat-description">{t('sessionsCompleted')}</div>
                     </div>
                     <div className="stat-box">
                         <div className="stat-number">90</div>
-                        <div className="stat-label">Số giờ đã học</div>
-                        <div className="stat-description">Tổng thời gian</div>
+                        <div className="stat-label">{t('studyHours')}</div>
+                        <div className="stat-description">{t('totalTime')}</div>
                     </div>
                 </div>
 
                 {/* Upcoming Sessions */}
                 <div className="upcoming-sessions">
-                    <h2 className="section-title">Buổi học sắp tới</h2>
-                    <p className="section-subtitle">Các buổi học đã được lên lịch</p>
+                    <h2 className="section-title">{t('upcomingSessions')}</h2>
+                    <p className="section-subtitle">{t('viewUpcoming')}</p>
                     
                     <div className="sessions-list">
                         {upcomingSessions.map(session => (
-                            <div key={session.id} className="session-card">
+                            <div 
+                                key={session.id} 
+                                className="session-card"
+                                onClick={() => navigate(`/course/${session.id}`)}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 <div className="session-left">
                                     <div className="tutor-avatar">
                                         <img src={session.avatar} alt={session.tutor} />
@@ -216,7 +206,10 @@ const DashboardPage = () => {
                                     <div className="session-date">{session.date}</div>
                                     <button 
                                         className={`confirm-btn status-${session.status}`}
-                                        onClick={() => handleConfirmClick(session.id)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleConfirmClick(session.id);
+                                        }}
                                         disabled={session.status === 'confirmed'}
                                     >
                                         {getButtonText(session.status)}
